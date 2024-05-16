@@ -9,17 +9,23 @@ using namespace QtCharts;
 
 class RightSideStrategy
 {
-protected:
+public:
     enum VIEW_OR_SERIES {
-        view,
-        series
+        VIEW,
+        SERIES
     };
 
-    VIEW_OR_SERIES viewOrSeries;
+protected:
+    VIEW_OR_SERIES m_viewOrSeries;
     QAbstractSeries *m_series = nullptr;
     QAbstractItemView *m_view = nullptr;
 
 public:
+
+    VIEW_OR_SERIES viewOrSeries();
+    QAbstractSeries* series();
+    QAbstractItemView* view();
+
     RightSideStrategy() = default;
     ~RightSideStrategy();
 };

@@ -51,7 +51,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <layout class="QHBoxLayout" name="mainHLayout">
           <property name="spacing">
            <number>5</number>
           </property>
@@ -62,7 +62,7 @@
            <widget class="QTreeView" name="leftView"/>
           </item>
           <item>
-           <widget class="QListView" name="rightView"/>
+           <widget class="QListView" name="rightSideClear"/>
           </item>
          </layout>
         </item>

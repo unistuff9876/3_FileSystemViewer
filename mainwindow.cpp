@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->leftView->setHeaderHidden(true);
 
     rightViewModel.setRootPath(QDir::currentPath());
-    ui->rightView->setModel(&rightViewModel);/*
+    ui->rightSideClear->setModel(&rightViewModel);/*
     ui->rightView->hideColumn(3);
     ui->rightView->hideColumn(2);
     ui->rightView->hideColumn(1);
@@ -25,4 +25,25 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setRightSideStrategy(RightSideStrategy *rightSideStrategy)
+{
+    delete this->rightSideStrategy;
+    this->rightSideStrategy = rightSideStrategy;
+
+    ui->rightSideClear->setVisible(false);
+
+    switch(rightSideStrategy->viewOrSeries()) {
+    case RightSideStrategy::VIEW_OR_SERIES::SERIES:
+        //ui->mainHLayout->addWidget(rightSideStrategy->series());
+    break;
+    case RightSideStrategy::VIEW_OR_SERIES::VIEW:
+        ui->mainHLayout->addWidget(rightSideStrategy->view());
+    break;
+
+    default:
+    break;
+    }
+
 }

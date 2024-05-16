@@ -3,7 +3,8 @@
 #include <QApplication>
 #include <QFileSystemModel>
 #include <QDir>
-//#include <QTreeView>
+
+#include "rightsidestrategylistview.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
     MainWindow mainWindow;
 
     mainWindow.show();
+    mainWindow.setRightSideStrategy(new RightSideStrategyListView);
 
     return a.exec();
 }

@@ -16,17 +16,20 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    Ui::MainWindow *ui;
+
     QFileSystemModel leftViewModel;
     QFileSystemModel rightViewModel;
 
-    RightSideStrategy *rightSideStrategy = new RightSideStrategyListView();
+    RightSideStrategy *rightSideStrategy = new RightSideStrategyListView;
+
+    //auto rightSide = ui->rightSideClear;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-private:
-    Ui::MainWindow *ui;
+    void setRightSideStrategy(RightSideStrategy *rightSideStrategy);
 };
 
 #endif // MAINWINDOW_H

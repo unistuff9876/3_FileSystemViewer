@@ -5,6 +5,6 @@
 
 RightSideStrategyListView::RightSideStrategyListView()
 {
-    viewOrSeries = VIEW_OR_SERIES::view;
+    m_viewOrSeries = VIEW_OR_SERIES::VIEW;
     m_view = new QListView;
 }
