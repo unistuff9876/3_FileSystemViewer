@@ -1,6 +1,7 @@
 #include "rightsidestrategy.h"
 
-RightSideStrategy::RightSideStrategy()
+RightSideStrategy::~RightSideStrategy()
 {
-
+    delete m_series;
+    delete m_view;
 }
