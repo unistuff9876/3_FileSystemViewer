@@ -8,6 +8,7 @@
 #include <QSharedPointer>
 
 #include "rightsidestrategy.h"
+#include "rightsidestrategyblank.h"
 #include "rightsidestrategylistview.h"
 
 namespace Ui {

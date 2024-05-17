@@ -13,8 +13,7 @@ class RightSideStrategy
 public:
     enum VIEW_OR_SERIES {
         VIEW,
-        SERIES,
-        BLANK
+        SERIES
     };
 
 protected:

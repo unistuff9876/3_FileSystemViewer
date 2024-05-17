@@ -28,14 +28,12 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     rightsidestrategy.cpp \
-    rightsidestrategylistview.cpp \
-    rightsidestrategyblank.cpp
+    rightsidestrategylistview.cpp
 
 HEADERS += \
         mainwindow.h \
     rightsidestrategy.h \
-    rightsidestrategylistview.h \
-    rightsidestrategyblank.h
+    rightsidestrategylistview.h
 
 FORMS += \
         mainwindow.ui
