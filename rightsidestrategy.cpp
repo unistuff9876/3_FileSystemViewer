@@ -5,7 +5,7 @@ RightSideStrategy::VIEW_OR_SERIES RightSideStrategy::viewOrSeries()
     return m_viewOrSeries;
 }
 
-QAbstractSeries *RightSideStrategy::series()
+QtCharts::QAbstractSeries *RightSideStrategy::series()
 {
     return m_series;
 }
@@ -20,8 +20,3 @@ RightSideStrategy::~RightSideStrategy()
     delete m_series;
     delete m_view;
 }
-/*
-void RightSideStrategy::getApplied(QMainWindow *mainWindow)
-{
-    mainWindow.setRightSideStrategy(this);
-}*/

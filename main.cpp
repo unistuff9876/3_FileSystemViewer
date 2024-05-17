@@ -5,6 +5,8 @@
 #include <QDir>
 
 #include "rightsidestrategylistview.h"
+#include "rightsidestrategybarseries.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +15,8 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow;
 
-    mainWindow.addRightSideStrategy("booti", new RightSideStrategyListView);
+    mainWindow.addRightSideStrategy("List", new RightSideStrategyListView);
+    mainWindow.addRightSideStrategy("Bar Chart", new RightSideStrategyBarSeries);
 
     mainWindow.show();
 

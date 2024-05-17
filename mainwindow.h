@@ -8,7 +8,6 @@
 #include <QSharedPointer>
 
 #include "rightsidestrategy.h"
-#include "rightsidestrategyblank.h"
 #include "rightsidestrategylistview.h"
 
 namespace Ui {
@@ -24,7 +23,7 @@ class MainWindow : public QMainWindow
     QFileSystemModel leftViewModel;
     QFileSystemModel rightViewModel;
 
-    RightSideStrategy *rightSideStrategyCurrent = new RightSideStrategyListView;
+    RightSideStrategy *rightSideStrategyCurrent = nullptr;
     QVector<RightSideStrategy*> rightSideStrategyVector;
 
 public:
@@ -36,6 +35,9 @@ public:
 public slots:
     void setRightSideStrategy(RightSideStrategy *rightSideStrategy);
     void setRightSideStrategy(int i);
+
+private slots:
+    void changeRightSideFolder(const QModelIndex &index);
 };
 
 #endif // MAINWINDOW_H
