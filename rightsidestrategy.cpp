@@ -20,3 +20,8 @@ RightSideStrategy::~RightSideStrategy()
     delete m_series;
     delete m_view;
 }
+/*
+void RightSideStrategy::getApplied(QMainWindow *mainWindow)
+{
+    mainWindow.setRightSideStrategy(this);
+}*/

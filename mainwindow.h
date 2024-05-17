@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QFileSystemModel>
 #include <QAbstractItemView>
+#include <QVector>
+#include <QSharedPointer>
 
 #include "rightsidestrategy.h"
 #include "rightsidestrategylistview.h"
@@ -21,15 +23,18 @@ class MainWindow : public QMainWindow
     QFileSystemModel leftViewModel;
     QFileSystemModel rightViewModel;
 
-    RightSideStrategy *rightSideStrategy = new RightSideStrategyListView;
-
-    //auto rightSide = ui->rightSideClear;
+    RightSideStrategy *rightSideStrategyCurrent = new RightSideStrategyListView;
+    QVector<RightSideStrategy*> rightSideStrategyVector;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void addRightSideStrategy(QString name, RightSideStrategy *rightSideStrategy);
+
+public slots:
     void setRightSideStrategy(RightSideStrategy *rightSideStrategy);
+    void setRightSideStrategy(int i);
 };
 
 #endif // MAINWINDOW_H

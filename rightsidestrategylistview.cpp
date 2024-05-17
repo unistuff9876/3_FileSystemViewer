@@ -1,4 +1,3 @@
-#include "rightsidestrategy.h"
 #include "rightsidestrategylistview.h"
 
 #include <QListView>

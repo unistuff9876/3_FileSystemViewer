@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->leftView->setHeaderHidden(true);
 
     rightViewModel.setRootPath(QDir::currentPath());
-    ui->rightSideClear->setModel(&rightViewModel);/*
+    ui->rightSideClear->setModel(&rightViewModel);
+    ui->rightSideClear->setVisible(false);/*
     ui->rightView->hideColumn(3);
     ui->rightView->hideColumn(2);
     ui->rightView->hideColumn(1);
@@ -27,10 +28,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::addRightSideStrategy(QString name, RightSideStrategy *rightSideStrategy)
+{
+    int i = rightSideStrategyVector.size();
+    rightSideStrategyVector.push_back(rightSideStrategy);
+    auto action = ui->menuView->addAction(name, this, [=](){setRightSideStrategy(0);});
+}
+
 void MainWindow::setRightSideStrategy(RightSideStrategy *rightSideStrategy)
 {
-    delete this->rightSideStrategy;
-    this->rightSideStrategy = rightSideStrategy;
+    //delete this->rightSideStrategyCurrent;
+    rightSideStrategyCurrent = rightSideStrategy;
 
     ui->rightSideClear->setVisible(false);
 
@@ -46,4 +54,14 @@ void MainWindow::setRightSideStrategy(RightSideStrategy *rightSideStrategy)
     break;
     }
 
+}
+
+void MainWindow::setRightSideStrategy(int i)
+{
+    ui->rightSideClear->setVisible(false);
+    if (i >= rightSideStrategyVector.size()) {
+        return;
+    }
+
+    setRightSideStrategy(rightSideStrategyVector[i]);
 }
