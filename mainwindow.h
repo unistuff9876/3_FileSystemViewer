@@ -6,6 +6,7 @@
 #include <QAbstractItemView>
 #include <QVector>
 #include <QSharedPointer>
+#include <QChartView>
 
 #include "rightsidestrategy.h"
 #include "rightsidestrategylistview.h"
@@ -25,6 +26,9 @@ class MainWindow : public QMainWindow
 
     RightSideStrategy *rightSideStrategyCurrent = nullptr;
     QVector<RightSideStrategy*> rightSideStrategyVector;
+
+    QtCharts::QChart *rightSideChart;
+    QtCharts::QChartView *rightSideChartView;
 
 public:
     explicit MainWindow(QWidget *parent = 0);

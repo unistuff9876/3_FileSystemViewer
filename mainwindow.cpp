@@ -17,8 +17,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->leftView->setHeaderHidden(true);
 
     rightViewModel.setRootPath(QDir::currentPath());
-    //ui->rightSideClear->setModel(&rightViewModel);
-    ui->rightSideClear->setVisible(true);
+
+    rightSideChart = new QtCharts::QChart;
+    rightSideChartView = new QtCharts::QChartView(rightSideChart);
+    ui->mainHLayout->addWidget(rightSideChartView);
+    rightSideChartView->setVisible(false);
 
     ui->pathLabel->setText("");
 
@@ -28,6 +31,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    for(auto &i: rightSideStrategyVector) {
+        delete i;
+    }
 }
 
 void MainWindow::addRightSideStrategy(QString name, RightSideStrategy *rightSideStrategy)
@@ -48,20 +55,41 @@ void MainWindow::setRightSideStrategy(RightSideStrategy *rightSideStrategy)
 {
     ui->rightSideClear->setVisible(false);
     if (rightSideStrategyCurrent != nullptr) {
-        ui->mainHLayout->removeWidget(rightSideStrategyCurrent->view());
+        if (rightSideStrategyCurrent == rightSideStrategy) {
+            return;
+        }
+
+        switch(rightSideStrategyCurrent->viewOrSeries()) {
+        case RightSideStrategy::VIEW_OR_SERIES::SERIES:
+            rightSideChartView->setVisible(false);
+            rightSideChart->removeSeries(rightSideStrategyCurrent->series());
+        break;
+        case RightSideStrategy::VIEW_OR_SERIES::VIEW:
+            rightSideStrategyCurrent->view()->setVisible(false);
+            ui->mainHLayout->removeWidget(rightSideStrategyCurrent->view());
+        break;
+        default:
+            Q_ASSERT("MainWindow::setRightSideStrategy(RightSideStrategy *) - default reached (1)");
+        break;
+        }
     }
 
     rightSideStrategyCurrent = rightSideStrategy;
 
     switch(rightSideStrategy->viewOrSeries()) {
     case RightSideStrategy::VIEW_OR_SERIES::SERIES:
+        //ui->rightSideChartView->setChart(rightSideStrategy->series());
+        //ui->rightSideChartView->setVisible(true);
         //ui->mainHLayout->addWidget(rightSideStrategy->series());
+        rightSideChart->addSeries(rightSideStrategy->series());
+        rightSideChartView->setVisible(true);
     break;
     case RightSideStrategy::VIEW_OR_SERIES::VIEW:
         ui->mainHLayout->addWidget(rightSideStrategy->view());
+        rightSideStrategy->view()->setVisible(true);
     break;
     default:
-        Q_ASSERT("MainWindow::setRightSideStrategy(RightSideStrategy *) - default reached");
+        Q_ASSERT("MainWindow::setRightSideStrategy(RightSideStrategy *) - default reached (2)");
     break;
     }
 }
@@ -99,9 +127,19 @@ void MainWindow::changeRightSideFolder(const QModelIndex &index)
     {
         QString path = leftViewModel.filePath(index);
         leftViewModel.setRootPath(path);
-        rightSideStrategyCurrent->view()->setModel(&rightViewModel);
-        rightSideStrategyCurrent->view()->setRootIndex(rightViewModel.index(path));
+        switch(rightSideStrategyCurrent->viewOrSeries()) {
+        case RightSideStrategy::VIEW_OR_SERIES::SERIES:
+            //ui->mainHLayout->addWidget(rightSideStrategy->series());
+        break;
+        case RightSideStrategy::VIEW_OR_SERIES::VIEW:
+            rightSideStrategyCurrent->view()->setModel(&rightViewModel);
+            rightSideStrategyCurrent->view()->setRootIndex(rightViewModel.index(path));
 
-        ui->pathLabel->setText(path);
+            ui->pathLabel->setText(path);
+        break;/*
+        default:
+            Q_ASSERT("MainWindow::changeRightSideFolder(const QModelIndex &) - default reached");
+        break;*/
+        }
     }
 }
