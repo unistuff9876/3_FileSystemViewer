@@ -7,6 +7,8 @@
 #include "rightsidestrategylistview.h"
 #include "rightsidestrategybarseries.h"
 
+#include "groupstrategyfileextensions.h"
+#include "groupstrategyimmediatefolders.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,8 +17,11 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow;
 
-    mainWindow.addRightSideStrategy("List", new RightSideStrategyListView);
+    mainWindow.addRightSideStrategy("Table", new RightSideStrategyListView);
     mainWindow.addRightSideStrategy("Bar Chart", new RightSideStrategyBarSeries);
+
+    mainWindow.addGroupStrategy("File Extensions", new GroupStrategyFileExtensions);
+    mainWindow.addGroupStrategy("Immediate Folders", new GroupStrategyImmediateFolders);
 
     mainWindow.show();
 

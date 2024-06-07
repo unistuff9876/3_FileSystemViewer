@@ -8,8 +8,8 @@
 #include <QSharedPointer>
 #include <QChartView>
 
+#include "groupstrategy.h"
 #include "rightsidestrategy.h"
-#include "rightsidestrategylistview.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +27,9 @@ class MainWindow : public QMainWindow
     RightSideStrategy *rightSideStrategyCurrent = nullptr;
     QVector<RightSideStrategy*> rightSideStrategyVector;
 
+    GroupStrategy *groupStrategyCurrent = nullptr;
+    QVector<GroupStrategy*> groupStrategyVector;
+
     QtCharts::QChart *rightSideChart;
     QtCharts::QChartView *rightSideChartView;
 
@@ -35,10 +38,14 @@ public:
     ~MainWindow();
 
     void addRightSideStrategy(QString name, RightSideStrategy *rightSideStrategy);
+    void addGroupStrategy(QString name, GroupStrategy *groupStrategy);
 
 public slots:
     void setRightSideStrategy(RightSideStrategy *rightSideStrategy);
     void setRightSideStrategy(int i);
+
+    void setGroupStrategy(GroupStrategy *groupStrategy);
+    void setGroupStrategy(int i);
 
 private slots:
     void changeRightSideFolder(const QModelIndex &index);

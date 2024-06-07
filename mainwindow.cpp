@@ -51,6 +51,20 @@ void MainWindow::addRightSideStrategy(QString name, RightSideStrategy *rightSide
     }
 }
 
+void MainWindow::addGroupStrategy(QString name, GroupStrategy *groupStrategy)
+{
+    int i = groupStrategyVector.size();
+    groupStrategyVector.push_back(groupStrategy);
+
+    auto action = ui->menuGroup->addAction(name, this, [=](){setGroupStrategy(i);});
+    action->setCheckable(true);
+    action->setChecked(false);
+
+    if (i == 0) {
+        setGroupStrategy(0);
+    }
+}
+
 void MainWindow::setRightSideStrategy(RightSideStrategy *rightSideStrategy)
 {
     ui->rightSideClear->setVisible(false);
@@ -116,6 +130,41 @@ void MainWindow::setRightSideStrategy(int i)
     }/**/
 
     setRightSideStrategy(strategyToSet);
+}
+
+void MainWindow::setGroupStrategy(GroupStrategy *groupStrategy)
+{
+    if (groupStrategyCurrent != nullptr) {
+        if (groupStrategyCurrent == groupStrategy) {
+            return;
+        }
+    }
+
+    groupStrategyCurrent = groupStrategy;
+}
+
+void MainWindow::setGroupStrategy(int i)
+{
+    if (i >= groupStrategyVector.size()) {
+        Q_ASSERT("MainWindow::setGroupStrategy(int) - index OOB");
+        return;
+    }
+
+    auto &strategyToSet = groupStrategyVector[i];
+
+    //unset the previous dropdown menu icons
+    //and set the new one
+    auto actions = ui->menuGroup->actions();
+    for (int j = 0; j < actions.size(); j++) {
+        if (j == i) {
+            actions[j]->setChecked(true);
+        }
+        else {
+            actions[j]->setChecked(false);
+        }
+    }/**/
+
+    setGroupStrategy(strategyToSet);
 }
 
 void MainWindow::changeRightSideFolder(const QModelIndex &index)

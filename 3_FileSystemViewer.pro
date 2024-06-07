@@ -29,13 +29,20 @@ SOURCES += \
         mainwindow.cpp \
     rightsidestrategy.cpp \
     rightsidestrategylistview.cpp \
-    rightsidestrategybarseries.cpp
+    rightsidestrategybarseries.cpp \
+    groupstrategyfileextensions.cpp \
+    groupstrategyresult.cpp \
+    groupstrategyimmediatefolders.cpp
 
 HEADERS += \
         mainwindow.h \
     rightsidestrategy.h \
     rightsidestrategylistview.h \
-    rightsidestrategybarseries.h
+    rightsidestrategybarseries.h \
+    groupstrategy.h \
+    groupstrategyfileextensions.h \
+    groupstrategyresult.h \
+    groupstrategyimmediatefolders.h
 
 FORMS += \
         mainwindow.ui
