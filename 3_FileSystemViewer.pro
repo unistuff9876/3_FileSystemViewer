@@ -25,23 +25,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    rightsidestrategy.cpp \
-    rightsidestrategylistview.cpp \
-    rightsidestrategybarseries.cpp \
+    main.cpp \
+    mainwindow.cpp \
     groupstrategyfileextensions.cpp \
     groupstrategyresult.cpp \
     groupstrategyimmediatefolders.cpp \
     viewstrategy.cpp \
     viewstrategyseries.cpp \
-    viewstrategytable.cpp
+    viewstrategytable.cpp \
+    mainwindowinit.cpp
 
 HEADERS += \
-        mainwindow.h \
-    rightsidestrategy.h \
-    rightsidestrategylistview.h \
-    rightsidestrategybarseries.h \
+    mainwindow.h \
     groupstrategy.h \
     groupstrategyfileextensions.h \
     groupstrategyresult.h \

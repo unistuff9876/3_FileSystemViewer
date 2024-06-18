@@ -9,19 +9,27 @@
 #include <QChartView>
 
 #include "groupstrategy.h"
-#include "rightsidestrategy.h"
+
+#include <QBoxLayout>
+#include <QLabel>
+#include <QMenuBar>
+#include <QTreeView>
 
 class ViewStrategy;
-
-namespace Ui {
-class MainWindow;
-}
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    Ui::MainWindow *ui;
+    QWidget *centralWidget_;
+    QMenuBar *menuBar;
+    QVBoxLayout *mainVLayout;
+    QLabel *pathLabel;
+    QHBoxLayout *mainHLayout;
+    QTreeView *leftSideTreeView;
+
+    QMenu *menuGroup;
+    QMenu *menuView;
 
     QFileSystemModel leftViewModel;
     QFileSystemModel rightViewModel;

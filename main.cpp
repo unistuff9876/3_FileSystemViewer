@@ -4,9 +4,6 @@
 #include <QFileSystemModel>
 #include <QDir>
 
-#include "rightsidestrategylistview.h"
-#include "rightsidestrategybarseries.h"
-
 #include "groupstrategyfileextensions.h"
 #include "groupstrategyimmediatefolders.h"
 
