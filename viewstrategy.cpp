@@ -10,7 +10,7 @@ ViewStrategy::~ViewStrategy()
     delete m_widget;
 }
 
-void ViewStrategy::update(GroupStrategyResult groupStrategyResult)
+QWidget &ViewStrategy::widget()
 {
-
+    return m_widget;
 }

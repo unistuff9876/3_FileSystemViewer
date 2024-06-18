@@ -8,8 +8,6 @@ class ViewStrategyTable : public ViewStrategy
 public:
     ViewStrategyTable();
 
-    void setAsCurrent();
-    void unsetAsCurrent();
     void update(GroupStrategyResult groupStrategyResult);
 };
 

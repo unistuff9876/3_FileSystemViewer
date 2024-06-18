@@ -24,6 +24,7 @@ GroupStrategyResult GroupStrategyImmediateFolders::use(QString path)
     QDirIterator itImmediateFolders(path, QDir::AllDirs | QDir::NoDotAndDotDot);
     while (itImmediateFolders.hasNext()) {
         itImmediateFolders.next();
+        //std::cout << qPrintable(itImmediateFolders.) << "\n";
 
         QFileInfo currentFileInfo = itImmediateFolders.fileInfo();
         QString currentDirName = currentFileInfo.fileName();
@@ -38,7 +39,7 @@ GroupStrategyResult GroupStrategyImmediateFolders::use(QString path)
             qint64 currentFileSize = currentFileInfoInner.size();
             totalFileSize += currentFileSize;
             namesAndSizesMap[currentDirName] += currentFileSize;
-        }
+        }/**/
     }
 
     return GroupStrategyResult(namesAndSizesMap, totalFileSize);

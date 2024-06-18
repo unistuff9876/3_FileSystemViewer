@@ -9,8 +9,6 @@
 class GroupStrategy
 {
 public:
-    GroupStrategy() = default;
-
     virtual GroupStrategyResult use(QString path) = 0;
 
     virtual QString prefix() = 0;

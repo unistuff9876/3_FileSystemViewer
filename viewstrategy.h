@@ -9,15 +9,14 @@
 
 class ViewStrategy
 {
-public:
-    ViewStrategy();
-
-    ~ViewStrategy();
 
     QWidget *m_widget;
 
-    virtual void setAsCurrent() = 0;
-    virtual void unsetAsCurrent() = 0;
+public:
+    virtual ~ViewStrategy();
+
+    QWidget &widget();
+
     virtual void update(GroupStrategyResult groupStrategyResult) = 0;
 };
 
