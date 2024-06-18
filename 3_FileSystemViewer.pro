@@ -32,7 +32,10 @@ SOURCES += \
     rightsidestrategybarseries.cpp \
     groupstrategyfileextensions.cpp \
     groupstrategyresult.cpp \
-    groupstrategyimmediatefolders.cpp
+    groupstrategyimmediatefolders.cpp \
+    viewstrategy.cpp \
+    viewstrategyseries.cpp \
+    viewstrategytable.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +45,10 @@ HEADERS += \
     groupstrategy.h \
     groupstrategyfileextensions.h \
     groupstrategyresult.h \
-    groupstrategyimmediatefolders.h
+    groupstrategyimmediatefolders.h \
+    viewstrategy.h \
+    viewstrategyseries.h \
+    viewstrategytable.h
 
 FORMS += \
         mainwindow.ui

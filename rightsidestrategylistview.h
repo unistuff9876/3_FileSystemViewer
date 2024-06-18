@@ -7,6 +7,8 @@ class RightSideStrategyListView : public RightSideStrategy
 {
 public:
     RightSideStrategyListView();
+
+    void update(GroupStrategyResult groupStrategyResult) final;
 };
 
 #endif // RIGHTSIDESTRATEGYLISTVIEW_H

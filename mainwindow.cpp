@@ -3,6 +3,8 @@
 
 #include <QDebug>
 
+#include "viewstrategy.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -31,23 +33,25 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-
-    for(auto &i: rightSideStrategyVector) {
-        delete i;
-    }
 }
 
-void MainWindow::addRightSideStrategy(QString name, RightSideStrategy *rightSideStrategy)
+MainWindow &MainWindow::instance()
 {
-    int i = rightSideStrategyVector.size();
-    rightSideStrategyVector.push_back(rightSideStrategy);
+    static MainWindow inst;
+    return inst;
+}
 
-    auto action = ui->menuView->addAction(name, this, [=](){setRightSideStrategy(i);});
+void MainWindow::addViewStrategy(QString name, ViewStrategy *viewStrategy)
+{
+    int i = viewStrategyVector.size();
+    viewStrategyVector.push_back(viewStrategy);
+
+    auto action = ui->menuView->addAction(name, this, [=](){setViewStrategy(i);});
     action->setCheckable(true);
     action->setChecked(false);
 
     if (i == 0) {
-        setRightSideStrategy(0);
+        setViewStrategy(0);
     }
 }
 
@@ -65,57 +69,28 @@ void MainWindow::addGroupStrategy(QString name, GroupStrategy *groupStrategy)
     }
 }
 
-void MainWindow::setRightSideStrategy(RightSideStrategy *rightSideStrategy)
+void MainWindow::setViewStrategy(ViewStrategy *viewStrategy)
 {
     ui->rightSideClear->setVisible(false);
-    if (rightSideStrategyCurrent != nullptr) {
-        if (rightSideStrategyCurrent == rightSideStrategy) {
+    if (viewStrategyCurrent != nullptr) {
+        if (viewStrategyCurrent == viewStrategy) {
             return;
         }
-
-        switch(rightSideStrategyCurrent->viewOrSeries()) {
-        case RightSideStrategy::VIEW_OR_SERIES::SERIES:
-            rightSideChartView->setVisible(false);
-            rightSideChart->removeSeries(rightSideStrategyCurrent->series());
-        break;
-        case RightSideStrategy::VIEW_OR_SERIES::VIEW:
-            rightSideStrategyCurrent->view()->setVisible(false);
-            ui->mainHLayout->removeWidget(rightSideStrategyCurrent->view());
-        break;
-        default:
-            Q_ASSERT("MainWindow::setRightSideStrategy(RightSideStrategy *) - default reached (1)");
-        break;
-        }
+        viewStrategyCurrent->unsetAsCurrent();
     }
 
-    rightSideStrategyCurrent = rightSideStrategy;
-
-    switch(rightSideStrategy->viewOrSeries()) {
-    case RightSideStrategy::VIEW_OR_SERIES::SERIES:
-        //ui->rightSideChartView->setChart(rightSideStrategy->series());
-        //ui->rightSideChartView->setVisible(true);
-        //ui->mainHLayout->addWidget(rightSideStrategy->series());
-        rightSideChart->addSeries(rightSideStrategy->series());
-        rightSideChartView->setVisible(true);
-    break;
-    case RightSideStrategy::VIEW_OR_SERIES::VIEW:
-        ui->mainHLayout->addWidget(rightSideStrategy->view());
-        rightSideStrategy->view()->setVisible(true);
-    break;
-    default:
-        Q_ASSERT("MainWindow::setRightSideStrategy(RightSideStrategy *) - default reached (2)");
-    break;
-    }
+    viewStrategyCurrent = viewStrategy;
+    viewStrategyCurrent->setAsCurrent();
 }
 
-void MainWindow::setRightSideStrategy(int i)
+void MainWindow::setViewStrategy(int i)
 {
-    if (i >= rightSideStrategyVector.size()) {
-        Q_ASSERT("MainWindow::setRightSideStrategy(int) - index OOB");
+    if (i >= viewStrategyVector.size()) {
+        Q_ASSERT("MainWindow::setViewStrategy(int) - index OOB");
         return;
     }
 
-    auto &strategyToSet = rightSideStrategyVector[i];
+    auto &strategyToSet = viewStrategyVector[i];
 
     //unset the previous dropdown menu icons
     //and set the new one
@@ -127,9 +102,9 @@ void MainWindow::setRightSideStrategy(int i)
         else {
             actions[j]->setChecked(false);
         }
-    }/**/
+    }
 
-    setRightSideStrategy(strategyToSet);
+    setViewStrategy(strategyToSet);
 }
 
 void MainWindow::setGroupStrategy(GroupStrategy *groupStrategy)
@@ -162,21 +137,30 @@ void MainWindow::setGroupStrategy(int i)
         else {
             actions[j]->setChecked(false);
         }
-    }/**/
+    }
 
     setGroupStrategy(strategyToSet);
 }
 
+void MainWindow::updateView()
+{
+    //qDebug() << ;
+    //groupStrategyCurrent->use("C:/");
+    //viewStrategyCurrent->update(groupStrategyCurrent->use("C:/"));
+}
+
 void MainWindow::changeRightSideFolder(const QModelIndex &index)
 {
-    //qDebug() << leftViewModel.filePath(index) << "is a dir:" << leftViewModel.isDir(index);
-
-    if (rightSideStrategyCurrent != nullptr
+    if (viewStrategyCurrent != nullptr
+        && groupStrategyCurrent != nullptr
         && leftViewModel.isDir(index))
     {
         QString path = leftViewModel.filePath(index);
-        leftViewModel.setRootPath(path);
-        switch(rightSideStrategyCurrent->viewOrSeries()) {
+        //leftViewModel.setRootPath(path);
+        ui->pathLabel->setText(path + " loading");
+        viewStrategyCurrent->update(groupStrategyCurrent->use(path));
+        ui->pathLabel->setText(path);
+        /*switch(rightSideStrategyCurrent->viewOrSeries()) {
         case RightSideStrategy::VIEW_OR_SERIES::SERIES:
             //ui->mainHLayout->addWidget(rightSideStrategy->series());
         break;
@@ -185,10 +169,7 @@ void MainWindow::changeRightSideFolder(const QModelIndex &index)
             rightSideStrategyCurrent->view()->setRootIndex(rightViewModel.index(path));
 
             ui->pathLabel->setText(path);
-        break;/*
-        default:
-            Q_ASSERT("MainWindow::changeRightSideFolder(const QModelIndex &) - default reached");
-        break;*/
-        }
+        break;
+        }*/
     }
 }

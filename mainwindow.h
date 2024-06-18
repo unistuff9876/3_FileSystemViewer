@@ -11,6 +11,8 @@
 #include "groupstrategy.h"
 #include "rightsidestrategy.h"
 
+class ViewStrategy;
+
 namespace Ui {
 class MainWindow;
 }
@@ -24,8 +26,8 @@ class MainWindow : public QMainWindow
     QFileSystemModel leftViewModel;
     QFileSystemModel rightViewModel;
 
-    RightSideStrategy *rightSideStrategyCurrent = nullptr;
-    QVector<RightSideStrategy*> rightSideStrategyVector;
+    ViewStrategy *viewStrategyCurrent = nullptr;
+    QVector<ViewStrategy*> viewStrategyVector;
 
     GroupStrategy *groupStrategyCurrent = nullptr;
     QVector<GroupStrategy*> groupStrategyVector;
@@ -33,19 +35,23 @@ class MainWindow : public QMainWindow
     QtCharts::QChart *rightSideChart;
     QtCharts::QChartView *rightSideChartView;
 
-public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void addRightSideStrategy(QString name, RightSideStrategy *rightSideStrategy);
+public:
+    static MainWindow &instance();
+
+    void addViewStrategy(QString name, ViewStrategy *viewStrategy);
     void addGroupStrategy(QString name, GroupStrategy *groupStrategy);
 
 public slots:
-    void setRightSideStrategy(RightSideStrategy *rightSideStrategy);
-    void setRightSideStrategy(int i);
+    void setViewStrategy(ViewStrategy *viewStrategy);
+    void setViewStrategy(int i);
 
     void setGroupStrategy(GroupStrategy *groupStrategy);
     void setGroupStrategy(int i);
+
+    void updateView();
 
 private slots:
     void changeRightSideFolder(const QModelIndex &index);

@@ -6,6 +6,8 @@
 #include <QAbstractItemView>
 #include <QMainWindow>
 
+#include "groupstrategyresult.h"
+
 class RightSideStrategy
 {
 public:
@@ -23,6 +25,8 @@ public:
     VIEW_OR_SERIES viewOrSeries();
     QtCharts::QAbstractSeries* series();
     QAbstractItemView* view();
+
+    virtual void update(GroupStrategyResult groupStrategyResult) = 0;
 
     RightSideStrategy() = default;
     ~RightSideStrategy();
