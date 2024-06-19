@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,11 +25,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp
+    main.cpp \
+    mainwindow.cpp \
+    groupstrategyfileextensions.cpp \
+    groupstrategyresult.cpp \
+    groupstrategyimmediatefolders.cpp \
+    viewstrategy.cpp \
+    viewstrategytable.cpp \
+    mainwindowinit.cpp \
+    viewstrategybarseries.cpp \
+    viewstrategypieseries.cpp
 
 HEADERS += \
-        mainwindow.h
+    mainwindow.h \
+    groupstrategy.h \
+    groupstrategyfileextensions.h \
+    groupstrategyresult.h \
+    groupstrategyimmediatefolders.h \
+    viewstrategy.h \
+    viewstrategytable.h \
+    viewstrategybarseries.h \
+    viewstrategypieseries.h
 
 FORMS += \
         mainwindow.ui
