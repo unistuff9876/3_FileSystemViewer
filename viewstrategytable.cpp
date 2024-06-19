@@ -16,6 +16,7 @@ void ViewStrategyTable::adaptAndApplyData(QStandardItemModel *model, GroupStrate
     //3 cols : name, size, percentage
     model->setColumnCount(3);
     model->setRowCount(result.itemCount());
+    model->setHorizontalHeaderLabels({"name", "size", "percentage"});
 
     for (int row = 0; row < model->rowCount(); ++row) {
         model->setItem(row, 0, new QStandardItem(result.names()[row]));

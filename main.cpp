@@ -9,6 +9,7 @@
 
 #include "viewstrategytable.h"
 #include "viewstrategybarseries.h"
+#include "viewstrategypieseries.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
 
     mainWindow.addViewStrategy("Table", new ViewStrategyTable);
     mainWindow.addViewStrategy("Bar Chart", new ViewStrategyBarSeries);
+    mainWindow.addViewStrategy("Pie Chart", new ViewStrategyPieSeries);
 
     mainWindow.addGroupStrategy("File Extensions", new GroupStrategyFileExtensions);
     mainWindow.addGroupStrategy("Immediate Folders", new GroupStrategyImmediateFolders);
