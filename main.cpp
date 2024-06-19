@@ -8,6 +8,7 @@
 #include "groupstrategyimmediatefolders.h"
 
 #include "viewstrategytable.h"
+#include "viewstrategybarseries.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
     MainWindow &mainWindow = MainWindow::instance();
 
     mainWindow.addViewStrategy("Table", new ViewStrategyTable);
-    //mainWindow.addViewStrategy("Bar Chart", new RightSideStrategyBarSeries);
+    mainWindow.addViewStrategy("Bar Chart", new ViewStrategyBarSeries);
 
     mainWindow.addGroupStrategy("File Extensions", new GroupStrategyFileExtensions);
     mainWindow.addGroupStrategy("Immediate Folders", new GroupStrategyImmediateFolders);

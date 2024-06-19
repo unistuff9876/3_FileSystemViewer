@@ -33,7 +33,8 @@ SOURCES += \
     viewstrategy.cpp \
     viewstrategyseries.cpp \
     viewstrategytable.cpp \
-    mainwindowinit.cpp
+    mainwindowinit.cpp \
+    viewstrategybarseries.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
     groupstrategyimmediatefolders.h \
     viewstrategy.h \
     viewstrategyseries.h \
-    viewstrategytable.h
+    viewstrategytable.h \
+    viewstrategybarseries.h
 
 FORMS += \
         mainwindow.ui

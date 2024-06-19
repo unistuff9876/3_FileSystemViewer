@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
 {
-    this->setMinimumSize(640, 400);
+    this->setMinimumSize(900, 400);
 
     mainVLayout = new QVBoxLayout();
     pathLabel = new QLabel();

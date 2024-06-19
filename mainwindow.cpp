@@ -44,13 +44,15 @@ void MainWindow::setViewStrategy(ViewStrategy *viewStrategy)
         if (viewStrategyCurrent == viewStrategy) {
             return;
         }
-        //unset current strategy
-        mainHLayout->removeWidget(viewStrategyCurrent->widget());
+        //hide current strategy
+        viewStrategyCurrent->widget()->hide();
+        //mainHLayout->removeWidget(viewStrategyCurrent->widget());
     }
 
     viewStrategyCurrent = viewStrategy;
     //set the new strategy
     mainHLayout->addWidget(viewStrategyCurrent->widget());
+    viewStrategyCurrent->widget()->show();
 }
 
 void MainWindow::setViewStrategy(int i)
@@ -112,6 +114,7 @@ void MainWindow::setGroupStrategy(int i)
     }
 
     setGroupStrategy(strategyToSet);
+    //updateView(leftViewModel)
 }
 
 void MainWindow::updateView(const QModelIndex &index)
