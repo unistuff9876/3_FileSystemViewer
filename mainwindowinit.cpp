@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
 {
-    this->setMinimumSize(558, 314);
+    this->setMinimumSize(640, 400);
 
     mainVLayout = new QVBoxLayout();
     pathLabel = new QLabel();
@@ -33,9 +33,11 @@ MainWindow::MainWindow(QWidget *parent)
     leftSideTreeView->hideColumn(1);
     leftSideTreeView->setHeaderHidden(true);
 
-    pathLabel->setText(QDir::currentPath());
+    rightSideItemModel = new QStandardItemModel();
 
-    connect(leftSideTreeView, &QTreeView::pressed, this, &MainWindow::changeRightSideFolder);
+    pathLabel->setText("");
+
+    connect(leftSideTreeView, &QTreeView::pressed, this, &MainWindow::updateView);
 }
 
 MainWindow::~MainWindow()

@@ -10,8 +10,6 @@ class GroupStrategy
 {
 public:
     virtual GroupStrategyResult use(QString path) = 0;
-
-    virtual QString prefix() = 0;
 };
 
 #endif // GROUPSTRATEGY_H

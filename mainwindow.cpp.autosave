@@ -112,6 +112,7 @@ void MainWindow::setGroupStrategy(int i)
     }
 
     setGroupStrategy(strategyToSet);
+    updateView(lef)
 }
 
 void MainWindow::updateView(const QModelIndex &index)

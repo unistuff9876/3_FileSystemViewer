@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QMenuBar>
 #include <QTreeView>
+#include <QStandardItemModel>
 
 class ViewStrategy;
 
@@ -43,6 +44,8 @@ class MainWindow : public QMainWindow
     QtCharts::QChart *rightSideChart;
     QtCharts::QChartView *rightSideChartView;
 
+    QStandardItemModel *rightSideItemModel;
+
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -59,10 +62,8 @@ public slots:
     void setGroupStrategy(GroupStrategy *groupStrategy);
     void setGroupStrategy(int i);
 
-    void updateView();
-
 private slots:
-    void changeRightSideFolder(const QModelIndex &index);
+    void updateView(const QModelIndex &index);
 };
 
 #endif // MAINWINDOW_H

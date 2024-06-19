@@ -8,7 +8,7 @@ class ViewStrategyTable : public ViewStrategy
 public:
     ViewStrategyTable();
 
-    void update(GroupStrategyResult groupStrategyResult);
+    void adaptAndApplyData(QStandardItemModel *model, GroupStrategyResult result) final;
 };
 
 #endif // VIEWSTRATEGYTABLE_H

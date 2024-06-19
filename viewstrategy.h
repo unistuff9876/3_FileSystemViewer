@@ -2,22 +2,28 @@
 #define VIEWSTRATEGY_H
 
 #include <QWidget>
+#include <QStandardItemModel>
 
 #include "groupstrategyresult.h"
 
-#include "mainwindow.h"
+#include <QLocale>
 
 class ViewStrategy
 {
-
+protected:
     QWidget *m_widget;
+
+    static QLocale qLocaleForSizeFormatting;
+
+    QString percentageQString(double curValue, double total);
 
 public:
     virtual ~ViewStrategy();
 
-    QWidget &widget();
+    QWidget *widget();
 
-    virtual void update(GroupStrategyResult groupStrategyResult) = 0;
+    virtual void adaptAndApplyData(QStandardItemModel *model, GroupStrategyResult result) = 0;
+
 };
 
 #endif // VIEWSTRATEGY_H
